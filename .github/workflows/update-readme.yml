@@ -1,38 +1,18 @@
-name: Update Profile Stats
-
+name: Update README
 on:
-  push:
-    branches: [ main ]   # <--- YE NAYA ADD KIYA HAI! Jab bhi main pe push ho, trigger hoga
   schedule:
-    - cron: '0 */6 * * *'
-  workflow_dispatch:      # Manual run ke liye
+    - cron: '0 0 * * *'  # Roz raat 12 baje (UTC)
+  workflow_dispatch:      # Manually bhi run kar sakte ho
 
 jobs:
-  build:
+  update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-        
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
-          
-      - name: Install dependencies
-        run: pip install requests python-dateutil
-        
-      - name: Run update
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          USER_NAME: ${{ secrets.USER_NAME }}
-        run: python today.py
-        
-      - name: Commit and push
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add dark_mode.svg
-          git diff --staged --quiet || git commit -m "Auto-update stats"
-          git push
-          
+          python-version: '3.11'
+      - run: python today.py  # Script run karo
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Updated README with new data"
