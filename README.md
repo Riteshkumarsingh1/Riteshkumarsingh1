@@ -1,7 +1,9 @@
 # 👋 Hi, I'm Ritesh Kumar Singh
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=Riteshkumarsingh1&label=Profile%20Views&color=0e75b6&style=flat" alt="Profile Views"/>
+  <img src="./ritesh-github-code-profile.png"
+       alt="Ritesh Kumar Singh - Coding Profile"
+       width="850">
 </p>
 
 <p align="center">
