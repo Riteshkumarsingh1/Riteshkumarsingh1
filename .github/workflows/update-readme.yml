@@ -1,9 +1,9 @@
-name: Update Profile README
+name: Update Profile Stats
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Har 6 ghante mein update
-  workflow_dispatch:  # Manually bhi run kar sakte ho
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,16 +20,16 @@ jobs:
       - name: Install dependencies
         run: pip install requests python-dateutil
         
-      - name: Run update script
+      - name: Run update
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           USER_NAME: ${{ secrets.USER_NAME }}
         run: python today.py
         
-      - name: Commit and push changes
+      - name: Commit and push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add dark_mode.svg
-          git diff --staged --quiet || git commit -m "Auto-update profile stats"
+          git diff --staged --quiet || git commit -m "Auto-update stats"
           git push
