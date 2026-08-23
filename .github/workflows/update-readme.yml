@@ -1,9 +1,11 @@
 name: Update Profile Stats
 
 on:
+  push:
+    branches: [ main ]   # <--- YE NAYA ADD KIYA HAI! Jab bhi main pe push ho, trigger hoga
   schedule:
     - cron: '0 */6 * * *'
-  workflow_dispatch:
+  workflow_dispatch:      # Manual run ke liye
 
 jobs:
   build:
@@ -33,3 +35,4 @@ jobs:
           git add dark_mode.svg
           git diff --staged --quiet || git commit -m "Auto-update stats"
           git push
+          
