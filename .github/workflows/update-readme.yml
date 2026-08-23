@@ -1,8 +1,12 @@
-name: Update README
+name: Update README Data
+
 on:
   schedule:
-    - cron: '0 0 * * *'  # Roz raat 12 baje (UTC)
-  workflow_dispatch:      # Manually bhi run kar sakte ho
+    - cron: '0 0 * * *'  # Roz raat 12 baje (UTC time)
+  workflow_dispatch:      # Manual trigger ke liye
+
+permissions:
+  contents: write
 
 jobs:
   update:
@@ -12,7 +16,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: python today.py  # Script run karo
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Updated README with new data"
+          
+      - name: Run Python Script
+        run: python today.py
+        
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Auto update profile data"
+          git push
