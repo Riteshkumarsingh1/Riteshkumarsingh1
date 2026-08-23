@@ -20,7 +20,6 @@ def graphql_request(query, variables):
     raise Exception(f"GraphQL failed: {request.text}")
 
 def get_repo_stars():
-    # Fetching all repos to sum stars
     cursor = None
     total_stars = 0
     repo_count = 0
@@ -88,3 +87,4 @@ def update_svg():
 
 if __name__ == "__main__":
     update_svg()
+    
